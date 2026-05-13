@@ -32,13 +32,6 @@ def get_greedy_action(Qs_avg, s):
     # get the action with the highest estimated value for the current state
     return max(actions, key=lambda a: Qs_avg.get((s, a), float('-inf')))
 
-def get_importance_sampling_weight(a, s, Qs_avg):
-    # off policy
-    pi = 1 if a == 1 else 0
-    greedy_a = get_greedy_action(Qs_avg, s)
-    b = 1 - epsilon + epsilon / len(actions) if a == greedy_a else epsilon / len(actions)
-    return pi / b
-
 for _ in range(5):
     for i in range(episodes):
         # current state
